@@ -21,6 +21,12 @@ useEffect( ()=>{
 },[index,people]);//need to change index & people when rendering
 
 
+useEffect(()=>{
+setInterval(()=>{
+  SetIndex(index + 1)
+},3000);
+},[index])
+
   return( 
   <section className='section'>
     <div className="title">
