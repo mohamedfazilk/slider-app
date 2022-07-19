@@ -21,10 +21,14 @@ useEffect( ()=>{
 },[index,people]);//need to change index & people when rendering
 
 
+//Another useEffect for cleanup function
 useEffect(()=>{
-setInterval(()=>{
+let slider =setInterval(()=>{
   SetIndex(index + 1)
 },3000);
+return ()=>{
+  clearInterval(slider)
+}
 },[index])
 
   return( 
