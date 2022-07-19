@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import data from './data'
 import {FaQuoteRight} from 'react-icons/fa'
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
@@ -7,6 +7,20 @@ import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 function App() {
   const [people, SetPeople] = useState(data);
   const [index, SetIndex] = useState(0);
+
+  //adding useEffect when index below 0 & above last index
+useEffect( ()=>{
+  const lastIndex = people.length - 1;
+  if(index < 0 ){
+    SetIndex(lastIndex)
+  }
+  
+  if(index > lastIndex){
+    SetIndex(0)
+  }
+},[index,people]);//need to change index & people when rendering
+
+
   return( 
   <section className='section'>
     <div className="title">
@@ -40,8 +54,12 @@ function App() {
         
         )
       })}
-      <button className='prev' onClick={()=>SetIndex(index -1)}><FiChevronLeft/></button>
-      <button className='next' onClick={()=>SetIndex(index +1)}><FiChevronRight/></button>
+      <button className='prev' onClick={()=>SetIndex(index -1)}>
+        <FiChevronLeft/>
+        </button>
+      <button className='next' onClick={()=>SetIndex(index +1)}>
+        <FiChevronRight/>
+        </button>
     </div>
   </section>
   )}
